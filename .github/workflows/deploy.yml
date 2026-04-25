@@ -53,7 +53,7 @@ jobs:
           script: |
             set -e
             DEPLOY_DIR="/opt/altrio/deploy"
-            APP_DIR="/opt/altrio/platform"
+            APP_DIR="/opt/altrio"
 
             # Stop and remove old containers
             cd $APP_DIR
