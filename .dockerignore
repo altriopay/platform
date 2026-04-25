@@ -1,0 +1,15 @@
+**/node_modules
+**/.git
+**/.claude
+**/.serena
+**/dist
+**/.turbo
+**/coverage
+**/*.log
+*.tmp
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+.vscode

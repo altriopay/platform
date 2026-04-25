@@ -1,0 +1,17 @@
+FROM oven/bun:1@sha256:87416c977a612a204eb54ab9f3927023c2a3c971f4f345a01da08ea6262ae30e AS builder
+
+WORKDIR /app
+COPY turbo.json ./
+COPY package.json bun.lock ./
+COPY packages ./packages
+COPY apps/server ./apps/server
+COPY apps/web ./apps/web
+RUN bun install --frozen-lockfile
+RUN bun run build
+
+FROM oven/bun:1@sha256:87416c977a612a204eb54ab9f3927023c2a3c971f4f345a01da08ea6262ae30e AS web
+WORKDIR /app
+COPY --from=builder /app/apps/web/dist ./dist
+USER bun
+CMD ["bunx", "serve", "dist", "-l", "3001", "-n", "--single"]
+EXPOSE 3001
