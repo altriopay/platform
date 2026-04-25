@@ -32,7 +32,7 @@ jobs:
             turbo.json \
             package.json \
             bun.lock \
-            ecosystem.config.js
+            ecosystem.config.cjs
 
       - name: Transfer artifact to VPS
         uses: appleboy/scp-action@v0.1.7
@@ -64,4 +64,4 @@ jobs:
             bun install --frozen-lockfile
 
             # Restart server with PM2
-            pm2 restart altrio-server || pm2 start ecosystem.config.js
+            pm2 restart altrio-server || pm2 start ecosystem.config.cjs
