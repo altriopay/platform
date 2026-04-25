@@ -31,7 +31,8 @@ jobs:
             packages \
             turbo.json \
             package.json \
-            bun.lock
+            bun.lock \
+            ecosystem.config.js
 
       - name: Transfer artifact to VPS
         uses: appleboy/scp-action@v0.1.7
@@ -55,13 +56,12 @@ jobs:
             DEPLOY_DIR="/opt/altrio/deploy"
             APP_DIR="/opt/altrio"
 
-            # Stop and remove old containers
-            cd $APP_DIR
-            docker compose down || true
-
             # Extract new build into app dir
             tar -xzf $DEPLOY_DIR/deploy.tar.gz -C $APP_DIR
 
-            # Rebuild and start containers
-            docker compose build web --build-arg "VITE_SERVER_URL=\$(grep VITE_SERVER_URL .env.web | cut -d '=' -f2)"
-            docker compose up -d
+            # Install deps and rebuild (in case of native deps)
+            cd $APP_DIR
+            bun install --frozen-lockfile
+
+            # Restart server with PM2
+            pm2 restart altrio-server || pm2 start ecosystem.config.js
