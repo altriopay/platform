@@ -62,6 +62,6 @@ jobs:
             # Extract new build into app dir
             tar -xzf $DEPLOY_DIR/deploy.tar.gz -C $APP_DIR
 
-            # Rebuild and start containers (pass .env.web for Vite build-time vars)
-            docker compose build --env-file .env.web web
+            # Rebuild and start containers
+            docker compose build web --build-arg "VITE_SERVER_URL=\$(grep VITE_SERVER_URL .env.web | cut -d '=' -f2)"
             docker compose up -d
