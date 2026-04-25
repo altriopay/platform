@@ -59,9 +59,10 @@ jobs:
             # Extract new build into app dir
             tar -xzf $DEPLOY_DIR/deploy.tar.gz -C $APP_DIR
 
-            # Install deps and rebuild (in case of native deps)
+            # Install deps and build on VPS
             cd $APP_DIR
             bun install --frozen-lockfile
+            bun run build
 
             # Restart server with PM2
             pm2 restart altrio-server || pm2 start ecosystem.config.cjs
