@@ -2,6 +2,7 @@
 **/.git
 **/.claude
 **/.serena
+**/.serena.bak
 **/dist
 **/.turbo
 **/coverage
@@ -10,6 +11,14 @@
 .env
 .env.local
 .env.*.local
+.env.web
 *.pem
 *.key
 .vscode
+.oxlintrc.json
+.oxfmtrc.json
+.lefthook.yml
+lefthook.yml
+.github
+README.md
+bts.jsonc

@@ -1,19 +1,26 @@
-FROM oven/bun:1@sha256:87416c977a612a204eb54ab9f3927023c2a3c971f4f345a01da08ea6262ae30e AS builder
-
+FROM oven/bun:1 AS deps
 WORKDIR /app
-ARG VITE_SERVER_URL
-ENV VITE_SERVER_URL=$VITE_SERVER_URL
-COPY turbo.json ./
-COPY package.json bun.lock ./
-COPY packages ./packages
-COPY apps/server ./apps/server
-COPY apps/web ./apps/web
+COPY turbo.json package.json bun.lock ./
+COPY packages/config/package.json ./packages/config/package.json
+COPY packages/env/package.json ./packages/env/package.json
+COPY packages/ui/package.json ./packages/ui/package.json
+COPY packages/db/package.json ./packages/db/package.json
+COPY packages/auth/package.json ./packages/auth/package.json
+COPY packages/api/package.json ./packages/api/package.json
+COPY apps/web/package.json ./apps/web/package.json
 RUN bun install --frozen-lockfile
-RUN bun run build
 
-FROM oven/bun:1@sha256:87416c977a612a204eb54ab9f3927023c2a3c971f4f345a01da08ea6262ae30e AS web
+FROM deps AS build
 WORKDIR /app
-COPY --from=builder /app/apps/web/dist ./dist
-USER bun
-CMD ["bunx", "serve", "dist", "-l", "3001", "-n", "--single"]
+COPY packages ./packages
+COPY apps/web ./apps/web
+COPY tsconfig.json ./
+RUN bun run --filter=web build
+
+FROM caddy:alpine
+COPY --from=build /app/apps/web/dist /srv
+COPY Caddyfile /etc/caddy/Caddyfile
+COPY docker/entrypoint-web.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
 EXPOSE 3001
