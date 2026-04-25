@@ -1,7 +1,7 @@
 const path = require("path");
 const fs = require("fs");
 
-const envFile = path.join(__dirname, ".env");
+const envFile = path.join("/opt/altrio", ".env");
 const env = {};
 if (fs.existsSync(envFile)) {
   fs.readFileSync(envFile, "utf8")
