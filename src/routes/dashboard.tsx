@@ -1,9 +1,19 @@
+import { useWallet } from "@solana/wallet-adapter-react";
+
 export function DashboardComponent() {
+  const { publicKey, disconnect } = useWallet();
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-background text-foreground">
-      <main className="text-center">
+      <main className="text-center space-y-4">
         <h1 className="text-2xl font-semibold">Dashboard</h1>
-        <p className="mt-2 text-muted-foreground">Coming soon...</p>
+        <p className="text-muted-foreground">Connected: {publicKey?.toBase58()}</p>
+        <button
+          onClick={() => disconnect()}
+          className="px-4 py-2 border border-border-low rounded-lg hover:bg-accent"
+        >
+          Disconnect
+        </button>
       </main>
     </div>
   );
