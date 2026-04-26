@@ -1,15 +1,17 @@
 import { createRootRoute, createRoute } from "@tanstack/react-router";
-import { RootComponent } from "./routes/__root";
+import { LoginComponent } from "./routes/login";
+import { DashboardComponent } from "./routes/dashboard";
 
 const rootRoute = createRootRoute({
-  component: RootComponent,
+  component: LoginComponent,
 });
 
-const indexRoute = createRoute({
+const dashboardRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: "/",
+  path: "/dashboard",
+  component: DashboardComponent,
 });
 
-const routeTree = rootRoute.addChildren([indexRoute]);
+const routeTree = rootRoute.addChildren([dashboardRoute]);
 
-export { rootRoute, indexRoute, routeTree };
+export { rootRoute, routeTree };
