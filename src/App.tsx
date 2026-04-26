@@ -1,8 +1,7 @@
 import { useWalletConnection } from "@solana/react-hooks";
 
 export default function App() {
-  const { connectors, connect, disconnect, wallet, status } =
-    useWalletConnection();
+  const { connectors, connect, disconnect, wallet, status } = useWalletConnection();
 
   const address = wallet?.account.address.toString();
 
@@ -10,24 +9,18 @@ export default function App() {
     <div className="relative min-h-screen overflow-x-clip bg-bg1 text-foreground">
       <main className="relative z-10 mx-auto flex min-h-screen max-w-4xl flex-col gap-10 border-x border-border-low px-6 py-16">
         <header className="space-y-3">
-          <p className="text-sm uppercase tracking-[0.18em] text-muted">
-            Solana starter kit
-          </p>
+          <p className="text-sm uppercase tracking-[0.18em] text-muted">Solana starter kit</p>
           <h1 className="text-3xl font-semibold tracking-tight text-foreground">
             Ship a Solana dapp fast
           </h1>
           <p className="max-w-3xl text-base leading-relaxed text-muted">
-            Drop in <code className="font-mono">@solana/react-hooks</code>, wrap
-            your tree once, and you get wallet connect/disconnect plus
-            ready-to-use hooks for balances and transactions—no manual RPC
-            wiring.
+            Drop in <code className="font-mono">@solana/react-hooks</code>, wrap your tree once, and
+            you get wallet connect/disconnect plus ready-to-use hooks for balances and
+            transactions—no manual RPC wiring.
           </p>
           <ul className="mt-4 space-y-2 text-sm text-foreground">
             <li className="flex gap-2">
-              <span
-                className="mt-1.5 h-2 w-2 rounded-full bg-foreground/60"
-                aria-hidden
-              />
+              <span className="mt-1.5 h-2 w-2 rounded-full bg-foreground/60" aria-hidden />
               <div>
                 <a
                   className="font-medium underline underline-offset-2"
@@ -41,10 +34,7 @@ export default function App() {
               </div>
             </li>
             <li className="flex gap-2">
-              <span
-                className="mt-1.5 h-2 w-2 rounded-full bg-foreground/60"
-                aria-hidden
-              />
+              <span className="mt-1.5 h-2 w-2 rounded-full bg-foreground/60" aria-hidden />
               <div>
                 <a
                   className="font-medium underline underline-offset-2"
@@ -54,15 +44,11 @@ export default function App() {
                 >
                   Anchor docs
                 </a>{" "}
-                — build and test programs with IDL, macros, and type-safe
-                clients.
+                — build and test programs with IDL, macros, and type-safe clients.
               </div>
             </li>
             <li className="flex gap-2">
-              <span
-                className="mt-1.5 h-2 w-2 rounded-full bg-foreground/60"
-                aria-hidden
-              />
+              <span className="mt-1.5 h-2 w-2 rounded-full bg-foreground/60" aria-hidden />
               <div>
                 <a
                   className="font-medium underline underline-offset-2"
@@ -76,10 +62,7 @@ export default function App() {
               </div>
             </li>
             <li className="flex gap-2">
-              <span
-                className="mt-1.5 h-2 w-2 rounded-full bg-foreground/60"
-                aria-hidden
-              />
+              <span className="mt-1.5 h-2 w-2 rounded-full bg-foreground/60" aria-hidden />
               <div>
                 <a
                   className="font-medium underline underline-offset-2"
@@ -100,8 +83,7 @@ export default function App() {
             <div className="space-y-1">
               <p className="text-lg font-semibold">Wallet connection</p>
               <p className="text-sm text-muted">
-                Pick any discovered connector and manage connect / disconnect in
-                one spot.
+                Pick any discovered connector and manage connect / disconnect in one spot.
               </p>
             </div>
             <span className="rounded-full bg-cream px-3 py-1 text-xs font-semibold uppercase tracking-wide text-foreground/80">
@@ -122,8 +104,7 @@ export default function App() {
                   <span className="text-xs text-muted">
                     {status === "connecting"
                       ? "Connecting…"
-                      : status === "connected" &&
-                          wallet?.connector.id === connector.id
+                      : status === "connected" && wallet?.connector.id === connector.id
                         ? "Active"
                         : "Tap to connect"}
                   </span>
