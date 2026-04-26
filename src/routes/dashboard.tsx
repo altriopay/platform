@@ -1,7 +1,6 @@
 import { useWallet } from "@solana/wallet-adapter-react";
-import { Route } from "@tanstack/react-router";
 
-export function Dashboard() {
+export default function Dashboard() {
   const { publicKey, disconnect } = useWallet();
 
   return (
@@ -19,8 +18,3 @@ export function Dashboard() {
     </div>
   );
 }
-
-export const dashboardRoute = Route.create({
-  path: "/dashboard",
-  component: Dashboard,
-});
