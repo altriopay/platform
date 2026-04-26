@@ -1,4 +1,5 @@
 import { SolanaProvider } from "@solana/react-hooks";
+import { TooltipProvider } from "@/components/ui/tooltip";
 import { PropsWithChildren } from "react";
 import { autoDiscover, createClient } from "@solana/client";
 
@@ -8,5 +9,9 @@ const client = createClient({
 });
 
 export function Providers({ children }: PropsWithChildren) {
-  return <SolanaProvider client={client}>{children}</SolanaProvider>;
+  return (
+    <SolanaProvider client={client}>
+      <TooltipProvider>{children}</TooltipProvider>
+    </SolanaProvider>
+  );
 }
