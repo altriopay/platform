@@ -39,11 +39,11 @@ export function LoginComponent() {
 
         <p className="mt-6 text-xs text-muted-foreground">
           By signing in, you agree to our{" "}
-          <a href="#" className="underline underline-offset-2">
+          <a href="/terms" className="underline underline-offset-2">
             Terms
           </a>{" "}
           and{" "}
-          <a href="#" className="underline underline-offset-2">
+          <a href="/terms" className="underline underline-offset-2">
             Privacy Policy
           </a>
         </p>
