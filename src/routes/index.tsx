@@ -3,7 +3,7 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import { useNavigate } from "@tanstack/react-router";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 
-export function Index() {
+export default function Index() {
   const navigate = useNavigate();
   const { publicKey, connected } = useWallet();
 

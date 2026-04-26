@@ -1,8 +1,7 @@
 import { useMemo, type ReactNode } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { RouterProvider, routeTree } from "./routeTree.gen";
-import { createRouter } from "@tanstack/react-router";
+import { RouterProvider, router } from "./router";
 import { ConnectionProvider, WalletProvider } from "@solana/wallet-adapter-react";
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
 import { clusterApiUrl } from "@solana/web3.js";
@@ -13,8 +12,6 @@ import {
   TorusWalletAdapter,
 } from "@solana/wallet-adapter-wallets";
 import "@solana/wallet-adapter-react-ui/styles.css";
-
-const router = createRouter({ routeTree });
 
 interface ProvidersProps {
   children: ReactNode;

@@ -108,9 +108,6 @@ importers:
       '@tanstack/router-cli':
         specifier: ^1
         version: 1.166.36
-      '@tanstack/router-generator':
-        specifier: ^1.166.35
-        version: 1.166.35
       '@types/node':
         specifier: ^20
         version: 20.19.39
