@@ -1,20 +1,18 @@
 import { useEffect } from "react";
-import { useWalletConnection } from "@solana/react-hooks";
+import { useWallet, useConnection } from "@solana/wallet-adapter-react";
 import { useNavigate } from "@tanstack/react-router";
+import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 
 export function LoginComponent() {
   const navigate = useNavigate();
-  const { connectors, connect, wallet, status } = useWalletConnection();
+  const { publicKey, connected } = useWallet();
+  const { connection } = useConnection();
 
   useEffect(() => {
-    if (wallet) {
+    if (connected && publicKey) {
       navigate({ to: "/dashboard" });
     }
-  }, [wallet, navigate]);
-
-  const handleConnect = async (connectorId: string) => {
-    await connect(connectorId);
-  };
+  }, [connected, publicKey, navigate]);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background text-foreground">
@@ -24,17 +22,8 @@ export function LoginComponent() {
           <p className="text-base text-muted-foreground">Sign In To Manage Your Payment</p>
         </div>
 
-        <div className="space-y-2">
-          {connectors.map((connector) => (
-            <button
-              key={connector.id}
-              onClick={() => handleConnect(connector.id)}
-              disabled={status === "connecting"}
-              className="w-full rounded-lg border border-border-low bg-card px-4 py-3 font-medium transition hover:bg-accent"
-            >
-              {connector.name}
-            </button>
-          ))}
+        <div className="flex justify-center">
+          <WalletMultiButton />
         </div>
 
         <p className="mt-6 text-xs text-muted-foreground">
@@ -43,7 +32,7 @@ export function LoginComponent() {
             Terms
           </a>{" "}
           and{" "}
-          <a href="/terms" className="underline underline-offset-2">
+          <a href="/privacy" className="underline underline-offset-2">
             Privacy Policy
           </a>
         </p>
