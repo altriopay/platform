@@ -1,17 +1,16 @@
-import { SolanaProvider } from "@solana/react-hooks";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { PropsWithChildren } from "react";
-import { autoDiscover, createClient } from "@solana/client";
+import { router } from "./router";
+import { RouterProvider } from "@tanstack/react-router";
 
-const client = createClient({
-  endpoint: "https://api.devnet.solana.com",
-  walletConnectors: autoDiscover(),
-});
+export function Providers() {
+  const queryClient = new QueryClient();
 
-export function Providers({ children }: PropsWithChildren) {
   return (
-    <SolanaProvider client={client}>
-      <TooltipProvider>{children}</TooltipProvider>
-    </SolanaProvider>
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <RouterProvider router={router} />
+      </TooltipProvider>
+    </QueryClientProvider>
   );
 }
