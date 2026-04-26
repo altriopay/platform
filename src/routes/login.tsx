@@ -1,16 +1,19 @@
-import { useState } from "react";
+import { useEffect } from "react";
+import { useWalletConnection } from "@solana/react-hooks";
 import { useNavigate } from "@tanstack/react-router";
 
 export function LoginComponent() {
-  const [isConnecting, setIsConnecting] = useState(false);
   const navigate = useNavigate();
+  const { connectors, connect, wallet, status } = useWalletConnection();
 
-  const handleConnect = async () => {
-    setIsConnecting(true);
-    setTimeout(() => {
-      setIsConnecting(false);
-      navigate({ to: "/" });
-    }, 1000);
+  useEffect(() => {
+    if (wallet) {
+      navigate({ to: "/dashboard" });
+    }
+  }, [wallet, navigate]);
+
+  const handleConnect = async (connectorId: string) => {
+    await connect(connectorId);
   };
 
   return (
@@ -21,13 +24,18 @@ export function LoginComponent() {
           <p className="text-base text-muted-foreground">Sign In To Manage Your Payment</p>
         </div>
 
-        <button
-          onClick={handleConnect}
-          disabled={isConnecting}
-          className="w-full rounded-lg bg-primary px-4 py-3 font-medium text-primary-foreground transition hover:opacity-90 disabled:opacity-60"
-        >
-          {isConnecting ? "Connecting..." : "Connect Wallet"}
-        </button>
+        <div className="space-y-2">
+          {connectors.map((connector) => (
+            <button
+              key={connector.id}
+              onClick={() => handleConnect(connector.id)}
+              disabled={status === "connecting"}
+              className="w-full rounded-lg border border-border-low bg-card px-4 py-3 font-medium transition hover:bg-accent"
+            >
+              {connector.name}
+            </button>
+          ))}
+        </div>
 
         <p className="mt-6 text-xs text-muted-foreground">
           By signing in, you agree to our{" "}
