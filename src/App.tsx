@@ -6,7 +6,7 @@ export default function App() {
   const address = wallet?.account.address.toString();
 
   return (
-    <div className="relative min-h-screen overflow-x-clip bg-bg1 text-foreground">
+    <div className="relative min-h-screen overflow-x-clip bg-background text-foreground">
       <main className="relative z-10 mx-auto flex min-h-screen max-w-4xl flex-col gap-10 border-x border-border-low px-6 py-16">
         <header className="space-y-3">
           <p className="text-sm uppercase tracking-[0.18em] text-muted">Solana starter kit</p>
