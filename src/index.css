@@ -105,3 +105,21 @@
     @apply font-sans;
   }
 }
+
+/* Override wallet-adapter button styling to use system primary color */
+.wallet-adapter-button {
+  background-color: var(--primary) !important;
+  color: var(--primary-foreground) !important;
+  border-radius: var(--radius) !important;
+  font-weight: 500 !important;
+  transition: opacity 0.2s !important;
+}
+
+.wallet-adapter-button:hover {
+  opacity: 0.9 !important;
+}
+
+.wallet-adapter-button:disabled {
+  opacity: 0.6 !important;
+  cursor: not-allowed !important;
+}
